@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="create different designs from the same info without coding">
+    <meta name="author" content="shachar oz">
+
+    <title>Item Visualizer</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/freelancer.css" rel="stylesheet" type="text/css">
+   
+     <!-- slideshow cycle CSS -->
+    <link href="slideshow/css/extend-cycle2-slideshow.css" rel="stylesheet" type="text/css">
+   
+    <!-- editor styles -->
+    <style type="text/css">
+        .any-item-spacing .item-caption-hover
+        {
+            position: absolute;
+            top: 10px;
+            background-color: rgba(0,0,0,0.5);
+            width: 87%;
+            height: 95%;
+            padding: 10px;
+            display: none;
+        }
+        
+        .button-existed-list 
+        {
+            color:yellow;
+            cursor: pointer;
+        }
+        .button-existed-list:hover 
+        {
+            color:yellow;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #load-previous-list , #create-new-list, #upload-list-from-raw-code {
+         visibility: hidden;   
+        }
+        
+        #add-one-more-item-bt {
+            visibility: hidden;
+        }
+        
+    </style>
+</head>
+
+<body id="page-top" class="index black-theme" >
+   <!-- Navigation -->
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">item visualizer</a>
+         </div>
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+               <li class="hidden">
+                  <a href="#page-top"></a>
+               </li>
+               <li class="page-scroll active">
+                  <a href="#">add data</a>
+               </li>
+                <li class="page-scroll ">
+                  <a href="design-variety.html">select design</a>
+               </li>
+                <li class="page-scroll">
+               <a href="#">edit design</a>
+                  </li>
+                <li class="page-scroll">
+                  <a href="http://www.otherreality.org/people/shacharoz/">who</a>
+               </li>
+              <!--li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="portfolio-1-col.html">1 Column Portfolio</a>
+                            </li>
+                            <li><a href="portfolio-2-col.html">2 Column Portfolio</a>
+                            </li>
+                            <li><a href="portfolio-3-col.html">3 Column Portfolio</a>
+                            </li>
+                            <li><a href="portfolio-4-col.html">4 Column Portfolio</a>
+                            </li>
+                            <li><a href="portfolio-item.html">Single Portfolio Item</a>
+                            </li>
+                        </ul>
+                    </li-->
+            </ul>
+         </div>
+         <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+   </nav>
+   <br><br><br>
+    
+   <section style="background-color:black; color:white; height: 50%; padding-top: 5%;">
+      <div class="container">
+          
+              <div class="row">
+                  
+                  <div class="col-md-8">
+                      <div class="col-md-12">
+                            <h1 class="text-center">1. create your content</h1>
+                          <hr>
+                      </div>
+                      
+                      <div class="col-md-12">
+                      <div class="col-md-2">
+                           <button id="start-new-list-bt" type="button" class="btn btn-success btn-md" title="Create new list"  style="width:100%">
+                         + New
+                        </button>
+                     </div>
+                       <div class="col-md-2">
+                          <button id="load-previous-list-bt" type="button" class="btn btn-success btn-md" title="Load previous list" style="width:100%">
+                         + Load
+                        </button>
+                        </div>
+                       <div class="col-md-2">
+                          <button id="upload-list-object-bt" type="button" class="btn btn-success btn-md" title="Upload your list data" style="width:100%">
+                         + Upload
+                        </button>
+                        </div>
+                      </div>
+                   
+                      <div id="create-new-list">
+                       <div class="col-md-12">
+                              <div class="col-md-4">
+                           <p>Give your list a title: </p> 
+                       </div>
+                     <div class="col-md-4">
+                         <h3 id="storage-list-name" contenteditable="true" style="margin:0; color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"></h3> 
+                      </div>
+                            <div class="col-md-10">
+                       i.e. "projects", "lectures", "photos_from_trip_to_spain"
+                                </div>
+                        </div>
+                      </div>       
+                              <div id="load-previous-list">
+                    
+                           <div class="col-md-12">
+                           <div class="col-md-4">
+                           <p>Choose from existed lists:</p> 
+                       </div>
+                     <div class="col-md-4">
+                         <div id="existed-lists"> </div>
+                      </div>
+                     </div>
+                      </div>
+                      
+                       <div id="upload-list-from-raw-code">
+                              <div class="col-md-8">
+                     <form class="form-horizontal">
+<fieldset>
+    <div class="form-group">
+            <div class="col-md-12">                     
+                <textarea class="form-control" id="full-raw-list-object-code" name="raw-object-textarea">paste your code in here</textarea>
+             </div>
+             </div>
+</fieldset>
+</form>           
+                           </div>
+                           <div class="col-md-2">
+                          <button id="upload-object-bt" type="button" class="btn btn-success btn-md" title="Upload data" style="width:100%; height:65px">
+                         + Upload
+                        </button>
+                        </div>
+                      </div>    
+                     
+                      <div class="col-md-12">
+                      
+                      <!--div class="dropdown">
+                          <a data-toggle="dropdown" data-target="#" href="/create-content.html">Dropdown trigger</a>
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                  <li>sdfsdflksdjf
+                              </li>
+                              <li>sdfsdflksdjf
+                              </li>
+                              <li>sdfsdflksdjf
+                              </li>
+                          </ul>
+                          </div>
+                      </div-->
+                         </div> 
+                      
+                      <div class="col-md-12">
+                          <div id="result-gallery">
+                      
+            
+                       
+                       
+                       <!--
+                        Gallery code
+                    <div class="col-md-6 col-md-offset-3">
+
+                     <div class='cycle-slideshow' data-cycle-fx='scrollHorz' data-cycle-loader='true' data-cycle-auto-height='4:3' data-cycle-timeout='5000' data-cycle-pause-on-hover='true' data-cycle-overlay-template='<h4>{{title}}</h4><span>{{desc}}</span>' data-cycle-slides='li' style="min-height:250px;">
+                     <div class='cycle-prev'>left</div>
+                     <div class='cycle-next'>right</div>
+                     <div class='cycle-overlay custom'></div>
+                     <li data-cycle-title='project A title, year' data-cycle-desc=''> <a href='#' target='_blank'> <img src='http://dummyimage.com/600x400/aaaaaa/ffff00.jpg'> </a></li>
+                     <li data-cycle-title='project V title, year' data-cycle-desc=''> <a href='#' target='_blank'> <img src='http://dummyimage.com/600x400/aaaaaa/ffff00.jpg'> </a></li>
+                     <li data-cycle-title='project C title, year' data-cycle-desc=''> <a href='#' target='_blank'> <img src='http://dummyimage.com/600x400/aaaaaa/ffff00.jpg'> </a></li>
+                    </div>
+                    </div>
+
+-->
+                          </div>
+                          
+                          <div class="col-md-6">
+                          <button id="add-one-more-item-bt" type="button" class="btn btn-success btn-lg" style="width: 95%; height: 200px; margin-left: 2%; margin-top: 10px;">
+                         + Add one more
+                        </button>
+                      </div>
+                      
+                    
+                      </div>
+                  </div>
+                  
+          <div class="col-md-4" style="background-color:#111111;">
+         <h1 class="text-center">2. switch design</h1>  
+              <button id="update-visualization-gallery-bt" type="button" class="btn btn-primary btn-lg">
+             + Gallery
+            </button>
+              <button id="update-visualization-standard-items-bt" type="button" class="btn btn-primary btn-lg">
+             + Items
+            </button>
+              
+              <br><br>
+              <hr>
+              <br>
+              <h1 class="text-center">3. like it?</h1>  
+         <button id="update-code-bt" type="button" class="btn btn-primary btn-lg">-> Generate Code</button>
+  <form class="form-horizontal">
+<fieldset>
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="item-result-code">Result Code</label>
+  <div class="col-md-12">                     
+    <textarea class="form-control" readonly id="item-result-code" name="textarea">resulted code to copy</textarea>
+ </div>
+</div>
+    
+</fieldset>
+</form>
+              <hr>
+            <p>Think you might edit the content again? <a download="hello.txt" href="data:text/plain;charset=UTF-8,Hello%2C%20File!">
+  Save your raw data</a></p>
+              
+              <p>Premium account would offer you space online, so you could manage your lists easier.</p>
+              
+               <form class="form-horizontal">
+<fieldset>
+    <div class="form-group">
+            <div class="col-md-12">                     
+                <textarea class="form-control" readonly id="full-list-object-code" name="object-textarea">raw data</textarea>
+             </div>
+             </div>
+</fieldset>
+</form> 
+              
+          </div>
+         
+              </div>
+          </div>
+   </section>
+    
+    
+    
+    
+    
+     <br><br>
+    <!-- Footer -->
+      <footer class="text-center">
+        
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; 2014 - shachar oz
+                        <br> thanks to Omer Goshen
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     <!-- Load JavaScript -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <!-- jQuery always comes first. every other script needs it -->
+      <script src="js/jquery-1-10-2.js" type="text/javascript"></script>
+     <!-- slideshow from http://jquery.malsup.com/cycle2/demo/basic.php -->
+      <script src="http://malsup.github.com/jquery.cycle2.js" type="text/javascript"></script>
+     <!-- bootstrap
+    <script src="http://otherreality.org/people/shacharoz/js/bootstrap.min.js" type="text/javascript"></script> -->
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+    
+  <script src="js/print-content-object.js" type="text/javascript"></script>
+    
+</body>
+
+</html>
